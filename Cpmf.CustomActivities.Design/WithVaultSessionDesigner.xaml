@@ -32,7 +32,9 @@
                              ConverterParameter=In}"
                 ExpressionType="s:String"
                 OwnerActivity="{Binding Path=ModelItem}"
-                HintText="vault.example.com" Margin="0,2" />
+                HintText="vault.example.com"
+                ToolTip="Hostname or URL of the vault server (e.g. vault.example.com)."
+                Margin="0,2" />
 
             <TextBlock Grid.Row="1" Grid.Column="0" Text="Auth Mode" VerticalAlignment="Center" Margin="0,2" />
             <sapv:ExpressionTextBox Grid.Row="1" Grid.Column="1"
@@ -42,7 +44,9 @@
                              ConverterParameter=In}"
                 ExpressionType="ccm:AuthMode"
                 OwnerActivity="{Binding Path=ModelItem}"
-                HintText="Password" Margin="0,2" />
+                HintText="Password"
+                ToolTip="Authentication method used to connect to the vault (e.g. Password, Token)."
+                Margin="0,2" />
         </Grid>
 
         <!-- Body.Handler: correct binding for ActivityAction<T> typed delegate -->

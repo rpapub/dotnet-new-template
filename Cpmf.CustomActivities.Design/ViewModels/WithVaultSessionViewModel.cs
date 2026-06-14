@@ -21,10 +21,14 @@ namespace Cpmf.CustomActivities.Design.ViewModels
         {
             base.InitializeModel();
 
+            Host.DisplayName = "Host";
+            Host.Tooltip     = "Hostname or URL of the vault server (e.g. vault.example.com).";
             Host.IsRequired  = true;
             Host.IsPrincipal = true;
             Host.OrderIndex  = 0;
 
+            AuthMode.DisplayName = "Auth Mode";
+            AuthMode.Tooltip     = "Authentication method used to connect to the vault (e.g. Password, Token).";
             AuthMode.IsPrincipal = true;
             AuthMode.OrderIndex  = 1;
 
