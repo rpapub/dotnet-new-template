@@ -14,10 +14,12 @@ namespace Cpmf.CustomActivities.Activities
         [RequiredArgument]
         [Category("Input")]
         [DisplayName("Document ID")]
+        [Description("Unique identifier of the document to read from the vault.")]
         public InArgument<string>? DocumentId { get; set; }
 
         [Category("Input")]
         [DisplayName("Vault Path")]
+        [Description("Vault path where the document is stored. Leave empty to use the root path.")]
         public InArgument<string>? VaultPath { get; set; }
 
         protected override VaultDocument Execute(CodeActivityContext context)

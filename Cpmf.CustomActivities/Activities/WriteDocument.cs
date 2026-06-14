@@ -14,14 +14,17 @@ namespace Cpmf.CustomActivities.Activities
         [RequiredArgument]
         [Category("Input")]
         [DisplayName("Document ID")]
+        [Description("Unique identifier to assign to the document when writing to the vault.")]
         public InArgument<string>? DocumentId { get; set; }
 
         [Category("Input")]
         [DisplayName("Content")]
+        [Description("Text content to write to the vault document.")]
         public InArgument<string>? Content { get; set; }
 
         [Category("Output")]
         [DisplayName("Result")]
+        [Description("Operation result containing success status and any error details.")]
         public OutArgument<OperationResult>? Result { get; set; }
 
         protected override void Execute(CodeActivityContext context)

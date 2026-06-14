@@ -13,6 +13,7 @@ namespace Cpmf.CustomActivities.Activities
         [RequiredArgument]
         [Category("Input")]
         [DisplayName("Document ID")]
+        [Description("Unique identifier of the document to look up in the vault.")]
         public InArgument<string>? DocumentId { get; set; }
 
         protected override bool Execute(CodeActivityContext context)
