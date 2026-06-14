@@ -1,0 +1,54 @@
+<sap:ActivityDesigner
+    x:Class="Cpmf.CustomActivities.Design.WithVaultSessionDesigner"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sap="clr-namespace:System.Activities.Presentation;assembly=System.Activities.Presentation"
+    xmlns:sapv="clr-namespace:System.Activities.Presentation.View;assembly=System.Activities.Presentation"
+    xmlns:sapc="clr-namespace:System.Activities.Presentation.Converters;assembly=System.Activities.Presentation"
+    xmlns:ccm="clr-namespace:Cpmf.CustomActivities.Models;assembly=Cpmf.CustomActivities"
+    xmlns:s="clr-namespace:System;assembly=mscorlib"
+    Collapsible="True">
+
+    <sap:ActivityDesigner.Resources>
+        <sapc:ArgumentToExpressionConverter x:Key="ArgumentToExpressionConverter" />
+    </sap:ActivityDesigner.Resources>
+
+    <DockPanel MinWidth="280">
+        <Grid DockPanel.Dock="Top" Margin="4,4,4,6">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Host" VerticalAlignment="Center" Margin="0,2" />
+            <sapv:ExpressionTextBox Grid.Row="0" Grid.Column="1"
+                Expression="{Binding Path=ModelItem.Host,
+                             Converter={StaticResource ArgumentToExpressionConverter},
+                             Mode=TwoWay,
+                             ConverterParameter=In}"
+                ExpressionType="s:String"
+                OwnerActivity="{Binding Path=ModelItem}"
+                HintText="vault.example.com" Margin="0,2" />
+
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Auth Mode" VerticalAlignment="Center" Margin="0,2" />
+            <sapv:ExpressionTextBox Grid.Row="1" Grid.Column="1"
+                Expression="{Binding Path=ModelItem.AuthMode,
+                             Converter={StaticResource ArgumentToExpressionConverter},
+                             Mode=TwoWay,
+                             ConverterParameter=In}"
+                ExpressionType="ccm:AuthMode"
+                OwnerActivity="{Binding Path=ModelItem}"
+                HintText="Password" Margin="0,2" />
+        </Grid>
+
+        <!-- Body.Handler: correct binding for ActivityAction<T> typed delegate -->
+        <sap:WorkflowItemPresenter
+            Item="{Binding Path=ModelItem.Body.Handler, Mode=TwoWay}"
+            HintText="Drop activities here" />
+    </DockPanel>
+
+</sap:ActivityDesigner>

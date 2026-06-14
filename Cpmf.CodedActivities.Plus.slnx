@@ -1,5 +1,0 @@
-<Solution>
-  <Project Path="Cpmf.CodedActivities.Design/Cpmf.CodedActivities.Design.csproj" />
-  <Project Path="Cpmf.CodedActivities.Tests/Cpmf.CodedActivities.Tests.csproj" />
-  <Project Path="Cpmf.CodedActivities/Cpmf.CodedActivities.csproj" />
-</Solution>

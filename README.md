@@ -1,4 +1,4 @@
-# dotnet-new-template — UiPath Coded Activities (Plus Edition)
+﻿# dotnet-new-template — UiPath Coded Activities (Plus Edition)
 
 `dotnet new` template for UiPath VS-compiled coded activities: NativeActivity scope, split NuGet packages, ActivityDesigner chrome, xunit tests.
 
@@ -21,7 +21,7 @@
 
 ```bash
 # From NuGet (once published)
-dotnet new install RPAForge.Sftp.Plus.Templates
+dotnet new install Cpmf.CustomActivities.Plus.Templates
 
 # Or directly from this repo
 dotnet new install https://github.com/rpapub/dotnet-new-template
@@ -30,10 +30,10 @@ dotnet new install https://github.com/rpapub/dotnet-new-template
 ## Use
 
 ```bash
-dotnet new uipath-sftp-plus -n MyCompany.Ftp
+dotnet new my-custom-activities -n Acme.MyActivities
 
 # With explicit SDK versions (if yours differ from defaults)
-dotnet new uipath-sftp-plus -n MyCompany.Ftp \
+dotnet new my-custom-activities -n Acme.MyActivities \
   --authors "Jane Smith" \
   --workflowCompilerVersion "26.0.0-alpha.22366" \
   --runtimeDesignVersion "25.10.33"
@@ -42,27 +42,27 @@ dotnet new uipath-sftp-plus -n MyCompany.Ftp \
 Produces:
 
 ```
-MyCompany.Ftp/
+Acme.MyActivities/
 ├── Directory.Build.props          ← SDK paths + package metadata
 ├── nuget.config
 ├── justfile
-├── MyCompany.Ftp.Plus.nuspec      ← meta-package
-├── MyCompany.Ftp.Plus.Runtime.nuspec
-├── MyCompany.Ftp.Plus.Runtime.Portable.nuspec
-├── MyCompany.Ftp.Plus.Design.nuspec
-├── MyCompany.Ftp.Plus.slnx
-├── MyCompany.Ftp/                 ← runtime assembly (net6.0-windows + net6.0)
+├── Acme.MyActivities.Plus.nuspec      ← meta-package
+├── Acme.MyActivities.Plus.Runtime.nuspec
+├── Acme.MyActivities.Plus.Runtime.Portable.nuspec
+├── Acme.MyActivities.Plus.Design.nuspec
+├── Acme.MyActivities.Plus.slnx
+├── Acme.MyActivities/                 ← runtime assembly (net6.0-windows + net6.0)
 │   ├── Activities/
 │   ├── Exceptions/
 │   └── ...
-├── MyCompany.Ftp.Design/          ← WPF designer chrome (net6.0-windows)
-└── MyCompany.Ftp.Tests/           ← xunit tests
+├── Acme.MyActivities.Design/          ← WPF designer chrome (net6.0-windows)
+└── Acme.MyActivities.Tests/           ← xunit tests
 ```
 
 ## Build scaffolded project
 
 ```bash
-cd MyCompany.Ftp
+cd Acme.MyActivities
 just build    # dotnet build
 just test     # dotnet test
 just pack     # → build/nupkg/ (4 packages)
@@ -73,12 +73,12 @@ just publish  # copy to local Studio feed
 
 | | |
 |---|---|
-| `BuildConnection` | `NativeActivity` scope — injects `SftpConnection` via `context.Properties` |
+| `BuildConnection` | `NativeActivity` scope — injects connection via `context.Properties` |
 | `ProbeConnection` | `CodeActivity` — tests reachability, sets `IsReachable` |
 | `UploadFile` | `CodeActivity` stub |
 | `DownloadFile` | `CodeActivity` stub |
-| `SftpErrorClassifier` | Single `IsRetryable(Exception)` — layered error model |
-| 6 typed exceptions | `SftpAuthException`, `SftpTimeoutException`, etc. |
+| `ErrorClassifier` | Single `IsRetryable(Exception)` — layered error model |
+| 6 typed exceptions | `AuthException`, `TimeoutException`, etc. |
 | ActivityDesigner | `BuildConnectionDesigner.xaml` with `WorkflowItemPresenter` |
 | Split packages | `.Runtime` / `.Runtime.Portable` / `.Design` / meta |
 
