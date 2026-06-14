@@ -19,10 +19,12 @@ namespace Cpmf.CustomActivities.Activities
         [RequiredArgument]
         [Category("Connection")]
         [DisplayName("Host")]
+        [Description("Hostname or URL of the vault server (e.g. vault.example.com).")]
         public InArgument<string>? Host { get; set; }
 
         [Category("Authentication")]
         [DisplayName("Auth Mode")]
+        [Description("Authentication method used to connect to the vault (e.g. Password, Token).")]
         public InArgument<AuthMode>? AuthMode { get; set; }
 
         public override InArgument<bool> ContinueOnError { get; set; } = new(false);
