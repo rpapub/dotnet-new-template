@@ -2,7 +2,7 @@
   "$schema": "http://json.schemastore.org/template",
   "author": "Christian Prior-Mamulyan / RPAForge",
   "classifications": ["UiPath", "Activities", "Coded Activities", "NativeActivity"],
-  "identity": "RPAForge.UiPath.CodedActivities.Plus",
+  "identity": "RPAForge.UiPath.CustomActivities.Plus",
   "name": "UiPath Coded Activities — Plus Edition",
   "shortName": "my-custom-activities",
   "description": "Scaffold for UiPath VS-compiled coded activities: NativeActivity scope, split NuGet packages (.Runtime/.Runtime.Portable/.Design), ActivityDesigner chrome, xunit tests.",
@@ -12,6 +12,21 @@
   },
   "sourceName": "Cpmf.CustomActivities",
   "preferNameDirectory": true,
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "exclude": [
+            ".git/**",
+            "build/**",
+            "**/*.nupkg",
+            "**/bin/**",
+            "**/obj/**"
+          ]
+        }
+      ]
+    }
+  ],
   "symbols": {
     "authors": {
       "type": "parameter",
