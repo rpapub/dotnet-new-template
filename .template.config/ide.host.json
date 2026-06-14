@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json.schemastore.org/vs-2017.3.host",
+  "order": 0,
+  "learnMoreLink": "https://github.com/rpapub/dotnet-new-template",
+  "symbolInfo": [
+    {
+      "id": "authors",
+      "name": { "text": "Authors" },
+      "description": { "text": "Author name for NuGet metadata and copyright" },
+      "isVisible": true
+    },
+    {
+      "id": "workflowCompilerVersion",
+      "name": { "text": "WorkflowCompiler Version" },
+      "description": { "text": "uipath.workflowcompiler.windows version in NUGET_PACKAGES" },
+      "isVisible": true
+    },
+    {
+      "id": "runtimeDesignVersion",
+      "name": { "text": "Runtime.Design Version" },
+      "description": { "text": "uipath.uiautomation.activities.runtime.design version in NUGET_PACKAGES" },
+      "isVisible": true
+    }
+  ]
+}

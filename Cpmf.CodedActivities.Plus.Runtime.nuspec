@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package>
+  <metadata>
+    <id>Cpmf.CodedActivities.Plus.Runtime</id>
+    <version>$version$</version>
+    <authors>$authors$</authors>
+    <copyright>$copyright$</copyright>
+    <license type="expression">Apache-2.0</license>
+    <readme>README.md</readme>
+    <description>Cpmf.CodedActivities Plus edition — Windows Robot runtime (net6.0-windows).</description>
+    <dependencies>
+      <group targetFramework="net6.0-windows7.0">
+        <dependency id="Cpmf.CodedActivities.Plus.Design" version="[$version$]" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="README.md" target="\" />
+    <file src="Cpmf.CodedActivities\bin\Release\net6.0-windows\Cpmf.CodedActivities.dll"
+          target="lib\net6.0-windows7.0\" />
+  </files>
+</package>

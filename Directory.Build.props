@@ -1,0 +1,29 @@
+<Project>
+
+  <!--
+    UiPath SDK reference assembly versions — update when upgrading the UiPath SDK.
+    Resolved from NUGET_PACKAGES environment variable (standard NuGet global packages var).
+    Set NUGET_PACKAGES to your NuGet global packages folder, e.g. T:\nuget\packages
+  -->
+  <PropertyGroup>
+    <UiPathWorkflowCompilerVersion>26.0.0-alpha.22366</UiPathWorkflowCompilerVersion>
+    <UiPathRuntimeDesignVersion>25.10.33</UiPathRuntimeDesignVersion>
+    <SystemActivitiesDll>$(NUGET_PACKAGES)\uipath.workflowcompiler.windows\$(UiPathWorkflowCompilerVersion)\WorkflowCompiler\System.Activities.dll</SystemActivitiesDll>
+    <SystemActivitiesMetadataDll>$(NUGET_PACKAGES)\uipath.uiautomation.activities.runtime.design\$(UiPathRuntimeDesignVersion)\build\net6.0-windows\System.Activities.Metadata.dll</SystemActivitiesMetadataDll>
+    <SystemActivitiesPresentationDll>$(NUGET_PACKAGES)\uipath.uiautomation.activities.runtime.design\$(UiPathRuntimeDesignVersion)\build\net6.0-windows\System.Activities.Presentation.dll</SystemActivitiesPresentationDll>
+  </PropertyGroup>
+
+  <!-- Package metadata -->
+  <PropertyGroup>
+    <Authors>Christian Prior-Mamulyan</Authors>
+    <Company>RPAForge</Company>
+    <Copyright>Copyright (c) 2026 Christian Prior-Mamulyan</Copyright>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <Version>0.0.1</Version>
+    <AssemblyVersion>0.0.1.0</AssemblyVersion>
+    <FileVersion>0.0.1.0</FileVersion>
+    <RepositoryType>git</RepositoryType>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>

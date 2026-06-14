@@ -1,0 +1,23 @@
+# .NET build output
+**/bin/
+**/obj/
+
+# NuGet packages
+*.nupkg
+build/nupkg/
+
+# User-specific VS files
+*.user
+*.suo
+.vs/
+
+# Rider
+.idea/
+
+# Python (tools/)
+__pycache__/
+*.py[cod]
+.venv/
+
+# Local credentials
+.env

@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Christian Prior-Mamulyan / RPAForge",
+  "classifications": ["UiPath", "Activities", "Coded Activities", "NativeActivity"],
+  "identity": "RPAForge.UiPath.CodedActivities.Plus",
+  "name": "UiPath Coded Activities — Plus Edition",
+  "shortName": "uipath-plus",
+  "description": "Scaffold for UiPath VS-compiled coded activities: NativeActivity scope, split NuGet packages (.Runtime/.Runtime.Portable/.Design), ActivityDesigner chrome, xunit tests.",
+  "tags": {
+    "language": "C#",
+    "type": "solution"
+  },
+  "sourceName": "Cpmf.CodedActivities",
+  "preferNameDirectory": true,
+  "symbols": {
+    "authors": {
+      "type": "parameter",
+      "datatype": "string",
+      "defaultValue": "Your Name",
+      "description": "Author name used in NuGet metadata and copyright.",
+      "replaces": "Christian Prior-Mamulyan"
+    },
+    "copyrightYear": {
+      "type": "generated",
+      "generator": "now",
+      "parameters": {
+        "format": "yyyy"
+      },
+      "replaces": "2026"
+    },
+    "workflowCompilerVersion": {
+      "type": "parameter",
+      "datatype": "string",
+      "defaultValue": "26.0.0-alpha.22366",
+      "description": "Version of uipath.workflowcompiler.windows in NUGET_PACKAGES.",
+      "replaces": "26.0.0-alpha.22366"
+    },
+    "runtimeDesignVersion": {
+      "type": "parameter",
+      "datatype": "string",
+      "defaultValue": "25.10.33",
+      "description": "Version of uipath.uiautomation.activities.runtime.design in NUGET_PACKAGES.",
+      "replaces": "25.10.33"
+    }
+  },
+  "postActions": [
+    {
+      "description": "Restore NuGet packages",
+      "manualInstructions": [{ "text": "Run: dotnet restore" }],
+      "actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
+      "args": {
+        "executable": "dotnet",
+        "args": "restore"
+      },
+      "continueOnError": true
+    }
+  ]
+}
