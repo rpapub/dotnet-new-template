@@ -12,6 +12,7 @@
     <PackageOutputPath>../build/nupkg</PackageOutputPath>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <Description>Cpmf.CustomActivities Plus edition — UiPath coded activities (NativeActivity scope, ActivityDesigner chrome).</Description>
+    <PackageTags>UiPath;Activities;NativeActivity;WF4;RPA;ActivityDesigner</PackageTags>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 

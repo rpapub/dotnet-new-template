@@ -4,8 +4,8 @@
   "classifications": ["UiPath", "Activities", "Coded Activities", "NativeActivity"],
   "identity": "RPAForge.UiPath.CustomActivities.Plus",
   "name": "UiPath Coded Activities — Plus Edition",
-  "shortName": "my-custom-activities",
-  "description": "Scaffold for UiPath VS-compiled coded activities: NativeActivity scope, split NuGet packages (.Runtime/.Runtime.Portable/.Design), ActivityDesigner chrome, xunit tests.",
+  "shortName": "cpmf-custom-activities",
+  "description": "Scaffold for UiPath coded activities: NativeActivity scope, ActivityDesigner chrome, DesignPropertiesViewModel, split NuGet package, xunit tests.",
   "tags": {
     "language": "C#",
     "type": "solution"
@@ -58,16 +58,19 @@
       "replaces": "25.10.33"
     }
   },
+  "primaryOutputs": [
+    { "path": "Cpmf.CustomActivities.Plus.slnx" }
+  ],
   "postActions": [
     {
       "description": "Restore NuGet packages",
-      "manualInstructions": [{ "text": "Run: dotnet restore" }],
       "actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
+      "continueOnError": true,
       "args": {
         "executable": "dotnet",
         "args": "restore"
       },
-      "continueOnError": true
+      "manualInstructions": [{ "text": "Run: dotnet restore" }]
     }
   ]
 }
