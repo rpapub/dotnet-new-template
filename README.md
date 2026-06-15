@@ -9,11 +9,12 @@
 ### 1. Install the template
 
 ```bash
-# From this repo
-dotnet new install https://github.com/rpapub/dotnet-new-template
-
-# Or from NuGet (once published)
+# From NuGet (once published)
 dotnet new install Cpmf.CustomActivities.Plus.Templates
+
+# Or from a local clone
+git clone https://github.com/rpapub/dotnet-new-template
+dotnet new install ./dotnet-new-template
 ```
 
 ### 2. Scaffold your project
@@ -26,7 +27,6 @@ dotnet new cpmf-custom-activities -n Acme.MyActivities
 
 ```bash
 cd Acme.MyActivities
-dotnet restore
 dotnet build -c Release
 dotnet build Acme.MyActivities.Packaging/Acme.MyActivities.Packaging.csproj -c Release
 # → Acme.MyActivities.Plus.0.0.1.nupkg in build/nupkg/
