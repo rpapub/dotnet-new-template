@@ -1,8 +1,8 @@
-﻿{
+{
   "$schema": "http://json.schemastore.org/template",
   "author": "Christian Prior-Mamulyan / CPMForge",
   "classifications": ["UiPath", "Activities", "Coded Activities", "NativeActivity"],
-  "identity": "RPAForge.UiPath.CustomActivities.Plus",
+  "identity": "CPMForge.UiPath.CustomActivities.Plus",
   "name": "UiPath Coded Activities — Plus Edition",
   "shortName": "cpmf-custom-activities",
   "description": "Scaffold for UiPath coded activities: NativeActivity scope, ActivityDesigner chrome, DesignPropertiesViewModel, split NuGet package, xunit tests.",
@@ -12,22 +12,11 @@
   },
   "sourceName": "CPMForge.Template",
   "preferNameDirectory": true,
-  "sources": [
-    {
-      "modifiers": [
-        {
-          "exclude": [
-            ".git/**",
-            "build/**",
-            "**/*.nupkg",
-            "**/bin/**",
-            "**/obj/**",
-            "*.Templates.csproj"
-          ]
-        }
-      ]
+  "forms": {
+    "noop": {
+      "identifier": "noop"
     }
-  ],
+  },
   "symbols": {
     "authors": {
       "type": "parameter",
@@ -57,8 +46,42 @@
       "defaultValue": "25.10.33",
       "description": "Version of uipath.uiautomation.activities.runtime.design in NUGET_PACKAGES.",
       "replaces": "25.10.33"
+    },
+    "nameForPaths": {
+      "type": "derived",
+      "valueSource": "name",
+      "valueTransform": "noop",
+      "replaces": "CPMForgePath"
     }
   },
+  "sources": [
+    {
+      "source": ".",
+      "target": ".",
+      "modifiers": [
+        {
+          "exclude": [
+            ".git/**",
+            "build/**",
+            "**/*.nupkg",
+            "**/bin/**",
+            "**/obj/**",
+            "*.Templates.csproj",
+            "template-overrides/**",
+            "CPMForge.Template.Plus.slnx",
+            "CPMForge.Template.Api/CPMForge.Template.Api.csproj",
+            "CPMForge.Template.Design/CPMForge.Template.Design.csproj",
+            "CPMForge.Template.Packaging/CPMForge.Template.Packaging.csproj",
+            "CPMForge.Template.Tests/CPMForge.Template.Tests.csproj"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "template-overrides",
+      "target": "."
+    }
+  ],
   "primaryOutputs": [
     { "path": "CPMForge.Template.Plus.slnx" }
   ],

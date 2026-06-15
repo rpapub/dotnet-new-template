@@ -8,6 +8,7 @@
     <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
     <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
     <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);AddDlls</TargetsForTfmSpecificBuildOutput>
+    <PackageType>activities</PackageType>
     <PackageId>CPMForge.Template.Plus</PackageId>
     <PackageOutputPath>../build/nupkg</PackageOutputPath>
     <PackageReadmeFile>README.md</PackageReadmeFile>

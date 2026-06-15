@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="CPMForgePath/CPMForgePath.csproj" />
+  <Project Path="CPMForgePath.Api/CPMForgePath.Api.csproj" />
+  <Project Path="CPMForgePath.Design/CPMForgePath.Design.csproj" />
+  <Project Path="CPMForgePath.Packaging/CPMForgePath.Packaging.csproj" />
+  <Project Path="CPMForgePath.Tests/CPMForgePath.Tests.csproj" />
+</Solution>
