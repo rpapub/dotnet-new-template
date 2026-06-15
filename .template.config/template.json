@@ -21,7 +21,8 @@
             "build/**",
             "**/*.nupkg",
             "**/bin/**",
-            "**/obj/**"
+            "**/obj/**",
+            "*.Templates.csproj"
           ]
         }
       ]
