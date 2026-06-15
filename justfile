@@ -12,12 +12,16 @@ default:
 
 # Build solution — also produces NuGet package (GeneratePackageOnBuild in Packaging project)
 build:
-    dotnet build Cpmf.CustomActivities.Plus.slnx -c Release
+    dotnet build CPMForge.Template.Plus.slnx -c Release
 
 # Run unit tests
 test: build
-    dotnet test Cpmf.CustomActivities.Plus.slnx -c Release --no-build
+    dotnet test CPMForge.Template.Plus.slnx -c Release --no-build
 
 # Promote packed NuGet → local Studio feed
 publish: build
-    Copy-Item build/nupkg/Cpmf.CustomActivities.Plus.*.nupkg "{{local_nuget_feed}}" -Force
+    Copy-Item build/nupkg/CPMForge.Template.Plus.*.nupkg "{{local_nuget_feed}}" -Force
+
+# Bump version in Directory.Build.props (usage: just bump 0.0.3)
+bump ver:
+    $v = "{{ver}}"; $p = "Directory.Build.props"; $c = (Get-Content $p -Raw) -replace '<Version>[^<]+</Version>', "<Version>$v</Version>" -replace '<AssemblyVersion>[^<]+</AssemblyVersion>', "<AssemblyVersion>$v.0</AssemblyVersion>" -replace '<FileVersion>[^<]+</FileVersion>', "<FileVersion>$v.0</FileVersion>"; $c | Set-Content $p -NoNewline -Encoding UTF8; Write-Host "Bumped to $v"

@@ -1,6 +1,6 @@
 ﻿{
   "$schema": "http://json.schemastore.org/template",
-  "author": "Christian Prior-Mamulyan / RPAForge",
+  "author": "Christian Prior-Mamulyan / CPMForge",
   "classifications": ["UiPath", "Activities", "Coded Activities", "NativeActivity"],
   "identity": "RPAForge.UiPath.CustomActivities.Plus",
   "name": "UiPath Coded Activities — Plus Edition",
@@ -10,7 +10,7 @@
     "language": "C#",
     "type": "solution"
   },
-  "sourceName": "Cpmf.CustomActivities",
+  "sourceName": "CPMForge.Template",
   "preferNameDirectory": true,
   "sources": [
     {
@@ -60,7 +60,7 @@
     }
   },
   "primaryOutputs": [
-    { "path": "Cpmf.CustomActivities.Plus.slnx" }
+    { "path": "CPMForge.Template.Plus.slnx" }
   ],
   "postActions": [
     {

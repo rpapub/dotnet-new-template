@@ -1,7 +1,0 @@
-﻿<Solution>
-  <Project Path="Cpmf.CustomActivities/Cpmf.CustomActivities.csproj" />
-  <Project Path="Cpmf.CustomActivities.Api/Cpmf.CustomActivities.Api.csproj" />
-  <Project Path="Cpmf.CustomActivities.Design/Cpmf.CustomActivities.Design.csproj" />
-  <Project Path="Cpmf.CustomActivities.Packaging/Cpmf.CustomActivities.Packaging.csproj" />
-  <Project Path="Cpmf.CustomActivities.Tests/Cpmf.CustomActivities.Tests.csproj" />
-</Solution>

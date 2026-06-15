@@ -10,7 +10,7 @@
 
 ```bash
 # From NuGet (once published)
-dotnet new install Cpmf.CustomActivities.Plus.Templates
+dotnet new install CPMForge.Template.Plus.Templates
 
 # Or from a local clone
 git clone https://github.com/rpapub/dotnet-new-template

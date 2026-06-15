@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>CPMForge.Template.Design</AssemblyName>
+    <RootNamespace>CPMForge.Template.Design</RootNamespace>
+    <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CPMForge.Template\CPMForge.Template.csproj" />
+  </ItemGroup>
+
+  <!--
+    All three DLL paths resolved from Directory.Build.props via NUGET_PACKAGES env var.
+    See Directory.Build.props for UiPathRuntimeDesignVersion property.
+  -->
+  <ItemGroup>
+    <Reference Include="System.Activities">
+      <HintPath>$(SystemActivitiesDll)</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="System.Activities.Metadata">
+      <HintPath>$(SystemActivitiesMetadataDll)</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="System.Activities.Presentation">
+      <HintPath>$(SystemActivitiesPresentationDll)</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Activities.ViewModels" Version="1.0.0-20251030.4" />
+    <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
+  </ItemGroup>
+
+</Project>
