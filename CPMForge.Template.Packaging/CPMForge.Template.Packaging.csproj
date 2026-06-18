@@ -1,24 +1,28 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0;net6.0-windows</TargetFrameworks>
+    <TargetFrameworks>net8.0-windows</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
     <NoWarn>$(NoWarn);NU5128</NoWarn>
     <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
     <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
     <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);AddDlls</TargetsForTfmSpecificBuildOutput>
-    <PackageType>activities</PackageType>
     <PackageId>CPMForge.Template.Plus</PackageId>
     <PackageOutputPath>../build/nupkg</PackageOutputPath>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <Description>CPMForge.Template Plus edition — UiPath coded activities (NativeActivity scope, ActivityDesigner chrome).</Description>
-    <PackageTags>UiPath;Activities;NativeActivity;WF4;RPA;ActivityDesigner</PackageTags>
+    <Description>CPMForge.Template Plus edition - UiPath coded activities (NativeActivity scope, ActivityDesigner chrome).</Description>
+    <PackageTags>UiPathActivities</PackageTags>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
     <None Include="../README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <!-- Declared as public dependency so nuspec gets a net8.0-windows dependency group.
+       Studio uses that group for compatibility checks. -->
+  <ItemGroup>
+    <PackageReference Include="UiPath.System.Activities" Version="24.10.4" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,7 +33,7 @@
       <PrivateAssets>all</PrivateAssets>
     </ProjectReference>
     <ProjectReference Include="..\CPMForge.Template.Design\CPMForge.Template.Design.csproj"
-                      Condition="'$(TargetFramework)' == 'net6.0-windows'">
+                      Condition="'$(TargetFramework)' == 'net8.0-windows'">
       <PrivateAssets>all</PrivateAssets>
     </ProjectReference>
   </ItemGroup>
@@ -39,30 +43,26 @@
     PrivateAssets=all on ProjectReferences prevents DLL copy to this project's OutputPath,
     so we reference each project's bin directly.
 
-    Result: lib/net6.0/CPMForge.Template.dll
-            lib/net6.0/CPMForge.Template.Api.dll
-            lib/net6.0-windows/CPMForge.Template.dll
-            lib/net6.0-windows/CPMForge.Template.Api.dll
-            lib/net6.0-windows/CPMForge.Template.Design.dll
+    Result: lib/net8.0-windows/CPMForge.Template.dll
+            lib/net8.0-windows/CPMForge.Template.Api.dll
+            lib/net8.0-windows/CPMForge.Template.Design.dll
   -->
   <Target Name="AddDlls">
     <ItemGroup>
       <BuildOutputInPackage Include="..\CPMForge.Template\bin\$(Configuration)\$(TargetFramework)\CPMForge.Template.dll" />
       <BuildOutputInPackage Include="..\CPMForge.Template.Api\bin\$(Configuration)\$(TargetFramework)\CPMForge.Template.Api.dll" />
     </ItemGroup>
-    <ItemGroup Condition="'$(TargetFramework)' == 'net6.0-windows'">
+    <ItemGroup Condition="'$(TargetFramework)' == 'net8.0-windows'">
       <BuildOutputInPackage Include="..\CPMForge.Template.Design\bin\$(Configuration)\$(TargetFramework)\CPMForge.Template.Design.dll" />
     </ItemGroup>
   </Target>
 
-  <!-- Strip the empty Packaging project DLL from the package (keeps lib/ clean). -->
   <Target Name="RemoveMetaDll" AfterTargets="BuiltProjectOutputGroup">
     <ItemGroup>
       <BuiltProjectOutputGroupOutput Remove="@(BuiltProjectOutputGroupOutput)" />
     </ItemGroup>
   </Target>
 
-  <!-- Delete old nupkg before each build to avoid stale versions accumulating. -->
   <Target Name="CleanOldNupkg" BeforeTargets="Build">
     <ItemGroup>
       <_OldPkg Include="$(PackageOutputPath)\$(PackageId)*.nupkg" />

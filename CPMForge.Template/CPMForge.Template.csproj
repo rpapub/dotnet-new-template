@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0-windows;net6.0</TargetFrameworks>
+    <TargetFrameworks>net8.0-windows;net8.0</TargetFrameworks>
     <AssemblyName>CPMForge.Template</AssemblyName>
     <RootNamespace>CPMForge.Template</RootNamespace>
     <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
@@ -19,7 +19,7 @@
     SystemActivitiesDll resolved in Directory.Build.props from:
       $(NUGET_PACKAGES)\uipath.workflowcompiler.windows\$(UiPathWorkflowCompilerVersion)\WorkflowCompiler\System.Activities.dll
   -->
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net6.0'">
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net8.0'">
     <NoWarn>$(NoWarn);CA1416</NoWarn>
   </PropertyGroup>
 
