@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>net8.0;net8.0-windows</TargetFrameworks>
@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CPMForgePath\CPMForgePath.csproj" />
-    <ProjectReference Include="..\CPMForgePath.Rules\CPMForgePath.Rules.csproj" />
+    <ProjectReference Include="..\CPMForge.Template\CPMForge.Template.csproj" />
+    <ProjectReference Include="..\..\rules\CPMForge.Template.Rules\CPMForge.Template.Rules.csproj" />
   </ItemGroup>
 
   <ItemGroup>

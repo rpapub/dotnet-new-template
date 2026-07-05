@@ -69,10 +69,10 @@
             "*.Templates.csproj",
             "template-overrides/**",
             "CPMForge.Template.Plus.slnx",
-            "CPMForge.Template.Api/CPMForge.Template.Api.csproj",
-            "CPMForge.Template.Design/CPMForge.Template.Design.csproj",
-            "CPMForge.Template.Packaging/CPMForge.Template.Packaging.csproj",
-            "CPMForge.Template.Tests/CPMForge.Template.Tests.csproj"
+            "src/coded/CPMForge.Template.Api/CPMForge.Template.Api.csproj",
+            "src/coded/CPMForge.Template.Design/CPMForge.Template.Design.csproj",
+            "src/coded/CPMForge.Template.Packaging/CPMForge.Template.Packaging.csproj",
+            "src/coded/CPMForge.Template.Tests/CPMForge.Template.Tests.csproj"
           ]
         }
       ]

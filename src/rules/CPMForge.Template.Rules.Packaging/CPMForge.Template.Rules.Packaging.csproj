@@ -8,7 +8,7 @@
     <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
     <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);AddDlls</TargetsForTfmSpecificBuildOutput>
     <PackageId>CPMForge.Template.WorkflowAnalyzerRules</PackageId>
-    <PackageOutputPath>../build/nupkg</PackageOutputPath>
+    <PackageOutputPath>../../../build/nupkg</PackageOutputPath>
     <Description>CPMForge.Template standalone Workflow Analyzer rules.</Description>
     <PackageTags>UiPathActivities;WorkflowAnalyzer</PackageTags>
     <Nullable>enable</Nullable>

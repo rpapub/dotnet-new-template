@@ -1,9 +1,9 @@
 ﻿<Solution>
-  <Project Path="CPMForge.Template/CPMForge.Template.csproj" />
-  <Project Path="CPMForge.Template.Api/CPMForge.Template.Api.csproj" />
-  <Project Path="CPMForge.Template.Design/CPMForge.Template.Design.csproj" />
-  <Project Path="CPMForge.Template.Rules/CPMForge.Template.Rules.csproj" />
-  <Project Path="CPMForge.Template.Packaging/CPMForge.Template.Packaging.csproj" />
-  <Project Path="CPMForge.Template.Rules.Packaging/CPMForge.Template.Rules.Packaging.csproj" />
-  <Project Path="CPMForge.Template.Tests/CPMForge.Template.Tests.csproj" />
+  <Project Path="src/coded/CPMForge.Template/CPMForge.Template.csproj" />
+  <Project Path="src/coded/CPMForge.Template.Api/CPMForge.Template.Api.csproj" />
+  <Project Path="src/coded/CPMForge.Template.Design/CPMForge.Template.Design.csproj" />
+  <Project Path="src/coded/CPMForge.Template.Packaging/CPMForge.Template.Packaging.csproj" />
+  <Project Path="src/coded/CPMForge.Template.Tests/CPMForge.Template.Tests.csproj" />
+  <Project Path="src/rules/CPMForge.Template.Rules/CPMForge.Template.Rules.csproj" />
+  <Project Path="src/rules/CPMForge.Template.Rules.Packaging/CPMForge.Template.Rules.Packaging.csproj" />
 </Solution>
