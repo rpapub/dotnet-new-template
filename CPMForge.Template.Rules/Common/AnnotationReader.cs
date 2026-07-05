@@ -18,18 +18,28 @@ namespace CPMForge.Template.Rules.Common
     {
         // ── Core string-level methods ──────────────────────────────────────────
 
-        /// <summary>True if the annotation contains <c>@suppress:RULE-ID</c> for the given rule ID.</summary>
+        /// <summary>True if the annotation contains <c>@suppress:RULE-ID</c> for the given rule ID (all tokens checked).</summary>
         public static bool IsSuppressed(string? annotation, string ruleId)
-            => GetTagValue(annotation, "@suppress")
-                   ?.Equals(ruleId, StringComparison.OrdinalIgnoreCase) == true;
+            => Tokenize(annotation).Any(t =>
+                t.StartsWith("@suppress:", StringComparison.OrdinalIgnoreCase) &&
+                t.Substring("@suppress:".Length).Equals(ruleId, StringComparison.OrdinalIgnoreCase));
 
         /// <summary>True if the annotation contains <c>@nocheck</c> (suppresses all rules).</summary>
         public static bool IsNoCheck(string? annotation)
             => HasTag(annotation, "@nocheck");
 
-        /// <summary>True if the annotation contains the given tag (e.g. <c>@unit</c>, <c>@nocheck</c>).</summary>
+        /// <summary>
+        /// True if the annotation contains the given tag.
+        /// Matches both bare form (<c>@unit</c>) and value form (<c>@unit:VALUE</c>).
+        /// </summary>
         public static bool HasTag(string? annotation, string tag)
-            => Tokenize(annotation).Any(t => t.Equals(tag, StringComparison.OrdinalIgnoreCase));
+        {
+            var bare = tag.TrimEnd(':');
+            var prefix = bare + ":";
+            return Tokenize(annotation).Any(t =>
+                t.Equals(bare, StringComparison.OrdinalIgnoreCase) ||
+                t.StartsWith(prefix, StringComparison.OrdinalIgnoreCase));
+        }
 
         /// <summary>
         /// Returns the value after the colon for <c>@tag:VALUE</c>, or <c>null</c> if the tag is absent or has no value.

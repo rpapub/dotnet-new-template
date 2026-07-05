@@ -94,6 +94,8 @@ public abstract class ScopedRule<T> : RuleBase<T>
         if (AnnotationReader.IsSuppressed(annotation, Id))
             return Pass();
 
+        // When both filters are set they are combined with AND: ALL of RequiresAllTags must be present
+        // AND at least one of RequiresAnyTag must be present.
         if (RequiresAllTags != null || RequiresAnyTag != null)
         {
             if (RequiresAllTags != null && !RequiresAllTags.All(t => AnnotationReader.HasTag(annotation, t)))

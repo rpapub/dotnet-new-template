@@ -15,7 +15,7 @@ namespace CPMForge.Template.Rules.Core;
 /// Shared foundation for all analyzer components (Rule, Counter).
 /// Provides feature-gate hook and InspectionResult convenience methods.
 /// </summary>
-public abstract class AnalyzerBase : IRegisterAnalyzerConfiguration
+public abstract class AnalyzerBase
 {
     /// <summary>
     /// Override to require a minimum Studio SDK feature level.
@@ -24,8 +24,6 @@ public abstract class AnalyzerBase : IRegisterAnalyzerConfiguration
     /// When set, Initialize() silently skips registration if the feature is absent.
     /// </summary>
     protected virtual string? RequiredFeature => null;
-
-    public abstract void Initialize(IAnalyzerConfigurationService api);
 
     // ── InspectionResult factories ────────────────────────────────────────────
     protected static InspectionResult Pass()
@@ -43,10 +41,11 @@ public abstract class AnalyzerBase : IRegisterAnalyzerConfiguration
     protected static InspectionResult Fail(Rule rule, string message)
         => Fail(rule, new List<string> { message });
 
-    protected static InspectionResult Info(string message)
+    protected static InspectionResult Info(Rule rule, string message)
         => new()
         {
             HasErrors = false,
+            RecommendationMessage = rule.RecommendationMessage,
             ErrorLevel = TraceLevel.Info,
             Messages = new List<string> { message },
         };
