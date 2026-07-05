@@ -36,12 +36,16 @@
                       Condition="'$(TargetFramework)' == 'net8.0-windows'">
       <PrivateAssets>all</PrivateAssets>
     </ProjectReference>
+    <ProjectReference Include="..\CPMForgePath.Rules\CPMForgePath.Rules.csproj">
+      <PrivateAssets>all</PrivateAssets>
+    </ProjectReference>
   </ItemGroup>
 
   <Target Name="AddDlls">
     <ItemGroup>
       <BuildOutputInPackage Include="..\CPMForgePath\bin\$(Configuration)\$(TargetFramework)\CPMForge.Template.dll" />
       <BuildOutputInPackage Include="..\CPMForgePath.Api\bin\$(Configuration)\$(TargetFramework)\CPMForge.Template.Api.dll" />
+      <BuildOutputInPackage Include="..\CPMForgePath.Rules\bin\$(Configuration)\net8.0\CPMForge.Template.Rules.dll" />
     </ItemGroup>
     <ItemGroup Condition="'$(TargetFramework)' == 'net8.0-windows'">
       <BuildOutputInPackage Include="..\CPMForgePath.Design\bin\$(Configuration)\$(TargetFramework)\CPMForge.Template.Design.dll" />

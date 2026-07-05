@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CPMForgePath\CPMForgePath.csproj" />
+    <ProjectReference Include="..\CPMForgePath.Rules\CPMForgePath.Rules.csproj" />
   </ItemGroup>
 
   <ItemGroup>
