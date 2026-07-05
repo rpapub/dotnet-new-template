@@ -14,6 +14,7 @@ namespace CPMForge.Template.Rules
         public void Initialize(IAnalyzerConfigurationService api)
         {
             new NoOpRule().Initialize(api);
+            new WithVaultSessionPresentRule().Initialize(api);
         }
     }
 }
