@@ -79,6 +79,10 @@ public abstract class ScopedRule<T> : RuleBase<T>
     {
         IActivityModel a => a.AnnotationText,
         IWorkflowModel w => w.Root?.AnnotationText,
+        // Project rules: suppress/nocheck can be placed on any workflow's root annotation.
+        IProjectModel p => string.Join(" ", p.Workflows
+            .Select(w => w.Root?.AnnotationText)
+            .Where(a => a != null)),
         _ => null,
     };
 
