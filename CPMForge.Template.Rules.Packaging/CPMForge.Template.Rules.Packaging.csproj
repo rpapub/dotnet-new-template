@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net8.0</TargetFrameworks>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <NoWarn>$(NoWarn);NU5128</NoWarn>
+    <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
+    <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
+    <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);AddDlls</TargetsForTfmSpecificBuildOutput>
+    <PackageId>CPMForge.Template.WorkflowAnalyzerRules</PackageId>
+    <PackageOutputPath>../build/nupkg</PackageOutputPath>
+    <Description>CPMForge.Template standalone Workflow Analyzer rules.</Description>
+    <PackageTags>UiPathActivities;WorkflowAnalyzer</PackageTags>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CPMForge.Template.Rules\CPMForge.Template.Rules.csproj">
+      <PrivateAssets>all</PrivateAssets>
+    </ProjectReference>
+  </ItemGroup>
+
+  <Target Name="AddDlls">
+    <ItemGroup>
+      <BuildOutputInPackage Include="..\CPMForge.Template.Rules\bin\$(Configuration)\net8.0\CPMForge.Template.Rules.dll" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="RemoveMetaDll" AfterTargets="BuiltProjectOutputGroup">
+    <ItemGroup>
+      <BuiltProjectOutputGroupOutput Remove="@(BuiltProjectOutputGroupOutput)" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="CleanOldNupkg" BeforeTargets="Build">
+    <ItemGroup>
+      <_OldPkg Include="$(PackageOutputPath)\$(PackageId)*.nupkg" />
+    </ItemGroup>
+    <Delete Files="@(_OldPkg)" ContinueOnError="WarnAndContinue" />
+  </Target>
+
+</Project>
