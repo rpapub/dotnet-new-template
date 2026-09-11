@@ -14,7 +14,7 @@
       drifted from the original in both directions and stranded real bug fixes on each
       side for months. Reference the SDK instead of copying it.
     -->
-    <PackageReference Include="WatchfulAnvil.Sdk" Version="0.2.0-alpha" />
+    <PackageReference Include="WatchfulAnvil.Sdk" Version="0.1.0" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
