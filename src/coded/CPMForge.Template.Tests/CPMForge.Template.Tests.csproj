@@ -12,8 +12,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <!--
+      No ExcludeAssets=runtime here, unlike the rule and activity projects.
+      Those exclude it because Studio supplies these assemblies at run time, so shipping
+      them would be wrong. A test host has no Studio: excluding the runtime assets left
+      the DLL out of the test output and every rule test died in its constructor with
+      "Could not load file or assembly 'UiPath.Studio.Activities.Api'".
+    -->
     <PackageReference Include="UiPath.Activities.Api" Version="24.10.1">
-      <ExcludeAssets>runtime</ExcludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>

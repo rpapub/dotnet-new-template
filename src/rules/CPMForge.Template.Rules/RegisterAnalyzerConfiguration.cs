@@ -2,7 +2,7 @@
 // Copyright (c) 2026 Christian Prior-Mamulyan. Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 // </copyright>
 
-using CPMForge.Template.Rules.Core;
+using WatchfulAnvil.Sdk.Core;
 using CPMForge.Template.Rules.Rules;
 
 using UiPath.Studio.Activities.Api;

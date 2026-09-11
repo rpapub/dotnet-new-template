@@ -7,16 +7,35 @@
     <PackageDescription>Workflow Analyzer rules enforcing best-practice usage of CPMForge.Template.</PackageDescription>
   </PropertyGroup>
 
-  <!-- net6.0: targets Studio Windows < 2024.10 -->
+  <ItemGroup>
+    <!--
+      The rule base classes used to be vendored here: seven files copied from
+      WatchfulAnvil.Sdk under Core/ and Common/, with the namespace rewritten. That copy
+      drifted from the original in both directions and stranded real bug fixes on each
+      side for months. Reference the SDK instead of copying it.
+    -->
+    <PackageReference Include="WatchfulAnvil.Sdk" Version="0.2.0-alpha" />
+  </ItemGroup>
+
   <ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
+    <!--
+      Versions are literal here on purpose. WatchfulAnvil.Build publishes this matrix as
+      an MSBuild property, but a package's .props is not available during the first
+      restore, so a PackageReference using it fails with NU1015 on a clean clone. A NuGet
+      package cannot supply a version used by a PackageReference; it only works inside
+      the WatchfulAnvil repo, where the same files are imported from disk.
+
+      Keep these in step with build/WatchfulAnvil.Build/build/WatchfulAnvil.Build.props.
+      net6.0 targets Studio older than 2024.10.
+    -->
     <PackageReference Include="UiPath.Activities.Api" Version="23.10.3">
       <ExcludeAssets>runtime</ExcludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>
 
-  <!-- net8.0: targets Studio Windows 2024.10+ -->
   <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
+    <!-- net8.0 targets Studio 2024.10 and newer. -->
     <PackageReference Include="UiPath.Activities.Api" Version="24.10.1">
       <ExcludeAssets>runtime</ExcludeAssets>
       <PrivateAssets>all</PrivateAssets>
