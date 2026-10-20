@@ -38,6 +38,16 @@
       ]
     },
     {
+      "kind": "packaging",
+      "stage": "prod",
+      "path": "src/plus/RPAForge.TplSection.Packaging",
+      "source": { "csproj": "src/plus/RPAForge.TplSection.Packaging/RPAForge.TplSection.Packaging.csproj" },
+      "delivers": [
+        { "artifact": "nupkg", "brand": "rpaforge", "edition": "Plus", "channels": ["nuget-feed"] }
+      ],
+      "note": "private, never publicly distributed -- built from the same source as CPMForge.Template.Packaging, differs only by package id and config dependency"
+    },
+    {
       "kind": "tests",
       "stage": "test",
       "path": "src/plus/CPMForge.Template.Tests",

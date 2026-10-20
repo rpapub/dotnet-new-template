@@ -111,7 +111,8 @@
             "src/plus/CPMForge.Template.Api/CPMForge.Template.Api.csproj",
             "src/plus/CPMForge.Template.Design/CPMForge.Template.Design.csproj",
             "src/plus/CPMForge.Template.Packaging/CPMForge.Template.Packaging.csproj",
-            "src/plus/CPMForge.Template.Tests/CPMForge.Template.Tests.csproj"
+            "src/plus/CPMForge.Template.Tests/CPMForge.Template.Tests.csproj",
+            "src/plus/RPAForge.TplSection.Packaging/RPAForge.TplSection.Packaging.csproj"
           ]
         }
       ]

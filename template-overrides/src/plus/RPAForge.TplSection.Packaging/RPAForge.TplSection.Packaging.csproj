@@ -1,0 +1,88 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    RPAForge twin of CPMForge.Template.Packaging: the same binaries under the RPAForge brand,
+    depending on RPAForge.Config.Plus instead of CPMForge.Config.Plus. Private, never publicly
+    distributed. Keep it in step with CPMForge.Template.Packaging; only the package id,
+    description and config dependency differ.
+  -->
+  <PropertyGroup>
+    <!-- net8.0-windows: Windows Robot/Studio (carries the Design assembly too).
+         net8.0: the cross-platform (Linux) Robot. -->
+    <TargetFrameworks>net8.0-windows;net8.0</TargetFrameworks>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <NoWarn>$(NoWarn);NU5128</NoWarn>
+    <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
+    <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
+    <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);AddDlls</TargetsForTfmSpecificBuildOutput>
+    <PackageId>RPAForge.TplSection.Plus</PackageId>
+    <PackageOutputPath>../../../build/nupkg</PackageOutputPath>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <Description>CPMForge.Template Plus edition - UiPath coded activities. Published under the RPAForge.TplSection.Plus id - same binaries as CPMForge.Template.Plus.</Description>
+    <PackageTags>UiPathActivities</PackageTags>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="../../../README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <!-- Shipped defaults, read by Get Effective TplSection Config when no section is passed. -->
+  <ItemGroup>
+    <None Include="..\Config\TplSection.default.toml" Pack="true" PackagePath="content/Config/" />
+  </ItemGroup>
+
+  <!-- Declared as public dependency so nuspec gets a net8.0-windows dependency group.
+       Studio uses that group for compatibility checks. -->
+  <ItemGroup>
+    <PackageReference Include="UiPath.System.Activities" Version="26.8.2" />
+  </ItemGroup>
+
+  <!-- The RPAForge brand depends on the RPAForge config package (same CPMForge.Config.dll inside), restated here
+       because the main project references the config package privately. -->
+  <ItemGroup>
+    <PackageReference Include="RPAForge.Config.Plus" Version="[$(CpmfConfigPlusVersion),0.4)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CPMForgePath\CPMForgePath.csproj">
+      <PrivateAssets>all</PrivateAssets>
+    </ProjectReference>
+    <ProjectReference Include="..\CPMForgePath.Api\CPMForgePath.Api.csproj">
+      <PrivateAssets>all</PrivateAssets>
+    </ProjectReference>
+    <ProjectReference Include="..\CPMForgePath.Design\CPMForgePath.Design.csproj"
+                      Condition="'$(TargetFramework)' == 'net8.0-windows'">
+      <PrivateAssets>all</PrivateAssets>
+    </ProjectReference>
+    <ProjectReference Include="..\..\rules\CPMForgePath.Rules\CPMForgePath.Rules.csproj">
+      <PrivateAssets>all</PrivateAssets>
+    </ProjectReference>
+  </ItemGroup>
+
+  <!-- AddDlls: same as CPMForge.Template.Packaging. -->
+  <Target Name="AddDlls">
+    <ItemGroup>
+      <BuildOutputInPackage Include="..\CPMForgePath\bin\$(Configuration)\$(TargetFramework)\CPMForge.Template.dll" />
+      <BuildOutputInPackage Include="..\CPMForgePath.Api\bin\$(Configuration)\$(TargetFramework)\CPMForge.Template.Api.dll" />
+      <BuildOutputInPackage Include="..\..\rules\CPMForgePath.Rules\bin\$(Configuration)\net8.0\CPMForge.Template.Rules.dll" />
+    </ItemGroup>
+    <ItemGroup Condition="'$(TargetFramework)' == 'net8.0-windows'">
+      <BuildOutputInPackage Include="..\CPMForgePath.Design\bin\$(Configuration)\$(TargetFramework)\CPMForge.Template.Design.dll" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="RemoveMetaDll" AfterTargets="BuiltProjectOutputGroup">
+    <ItemGroup>
+      <BuiltProjectOutputGroupOutput Remove="@(BuiltProjectOutputGroupOutput)" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="CleanOldNupkg" BeforeTargets="Build">
+    <ItemGroup>
+      <_OldPkg Include="$(PackageOutputPath)\$(PackageId)*.nupkg" />
+    </ItemGroup>
+    <Delete Files="@(_OldPkg)" ContinueOnError="WarnAndContinue" />
+  </Target>
+
+</Project>

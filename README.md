@@ -74,6 +74,7 @@ Acme.MyActivities/
     │   ├── Acme.MyActivities.Api/              ← ICodedWorkflowsServiceRegistry
     │   ├── Acme.MyActivities.Design/           ← DesignPropertiesViewModel per activity (net8.0-windows)
     │   ├── Acme.MyActivities.Packaging/        ← produces Acme.MyActivities.Plus.nupkg (net8.0-windows + net8.0)
+    │   ├── RPAForge.MyActivities.Packaging/    ← RPAForge twin: same binaries, depends on RPAForge.Config.Plus
     │   └── Acme.MyActivities.Tests/            ← xunit tests
     ├── rules/
     │   ├── Acme.MyActivities.Rules/            ← Workflow Analyzer rules on CPMForge.RulesSdk

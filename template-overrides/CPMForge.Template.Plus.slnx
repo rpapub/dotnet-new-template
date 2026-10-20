@@ -4,6 +4,7 @@
   <Project Path="src/plus/CPMForgePath.Design/CPMForgePath.Design.csproj" />
   <Project Path="src/plus/CPMForgePath.Packaging/CPMForgePath.Packaging.csproj" />
   <Project Path="src/plus/CPMForgePath.Tests/CPMForgePath.Tests.csproj" />
+  <Project Path="src/plus/RPAForge.TplSection.Packaging/RPAForge.TplSection.Packaging.csproj" />
   <Project Path="src/rules/CPMForgePath.Rules/CPMForgePath.Rules.csproj" />
   <Project Path="src/rules/CPMForgePath.Rules.Packaging/CPMForgePath.Rules.Packaging.csproj" />
 </Solution>
