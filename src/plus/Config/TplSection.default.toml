@@ -1,0 +1,12 @@
+# TplSection: shipped defaults.
+# Mirrors CPMForge.Template.Configuration.TplSectionConfig. Change the class first, then this file.
+#
+# This file is read only when the calling process passes no TplSection section to the library's
+# effective-config activity. Normally the process owns its copy at Config/Libraries/<Property>/<Property>.toml.
+#
+#   REQUIRED  - the process must set it; empty here on purpose.
+#   MUTABLE   - the process may override it.
+#   IMMUTABLE - the library always overwrites it; a value here or in the process is ignored.
+
+# MUTABLE
+Enabled = true

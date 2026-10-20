@@ -4,8 +4,9 @@
 
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
-# Local Studio NuGet feed — update to match your environment
-local_nuget_feed := "C:\\Users\\Public\\Documents\\myNugetPackages"
+# Publishes into the local feed PublicLocal (C:\Users\Public\NuGetFeed). The script and the
+# NuGet.config naming the feed live next to each other in C:\Users\Public; nuget.exe must be on PATH.
+publish_script := "C:\\Users\\Public\\Publish-ToNuGetFeed.ps1"
 
 default:
     @just --list
@@ -18,9 +19,10 @@ build:
 test: build
     dotnet test CPMForge.Template.Plus.slnx -c Release --no-build
 
-# Promote packed NuGet → local Studio feed
+# Publish every packed .nupkg in build/nupkg (activities + rules) to PublicLocal.
+# Raise the version first (just bump x.y.z): publishing the same version twice is untested.
 publish: build
-    Copy-Item build/nupkg/CPMForge.Template.Plus.*.nupkg "{{local_nuget_feed}}" -Force
+    pwsh -NoProfile -File "{{publish_script}}" -Staging (Resolve-Path build/nupkg).Path
 
 # Bump version in Directory.Build.props (usage: just bump 0.0.3)
 bump ver:

@@ -1,0 +1,52 @@
+# ──────────────────────────────────────────────
+# Whitelist-based .gitignore
+# Default: ignore everything, then allow specific types.
+# Studio regenerates everything not on the allowlist when the project is opened.
+# ──────────────────────────────────────────────
+
+# Ignore everything by default
+*
+
+# Allow .gitignore itself
+!.gitignore
+
+# Allow these file types
+!*.xaml
+!*.json
+!*.md
+!*.yaml
+!*.yml
+!*.toml
+!*.txt
+
+# Allow directories (needed for recursion)
+!*/
+
+# ──────────────────────────────────────────────
+# UiPath Studio artefacts
+# ──────────────────────────────────────────────
+
+# .local — compilation cache, not source
+!.local/
+.local/*
+!.local/.entities/
+
+# Runtime/machine-local settings
+.settings/
+
+# Studio-generated build metadata, regenerated on open
+.project/
+.tmh/
+
+# Runtime-generated — changes every Studio open
+entry-points.json
+
+# Pack output
+output/
+
+**/*[Ss]cratch*.xaml
+**/*[Ss]cratch*.xaml.json
+*[Ss]cratch*.xaml
+*[Ss]cratch*.xaml.json
+
+~*

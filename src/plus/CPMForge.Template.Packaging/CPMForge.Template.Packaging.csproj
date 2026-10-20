@@ -1,0 +1,93 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- net8.0-windows: Windows Robot/Studio (carries the Design assembly too).
+         net8.0: the cross-platform (Linux) Robot. -->
+    <TargetFrameworks>net8.0-windows;net8.0</TargetFrameworks>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <NoWarn>$(NoWarn);NU5128</NoWarn>
+    <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
+    <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
+    <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);AddDlls</TargetsForTfmSpecificBuildOutput>
+    <PackageId>CPMForge.Template.Plus</PackageId>
+    <PackageOutputPath>../../../build/nupkg</PackageOutputPath>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <Description>CPMForge.Template Plus edition - UiPath coded activities (NativeActivity scope, ActivityDesigner chrome).</Description>
+    <PackageTags>UiPathActivities</PackageTags>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="../../../README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <!-- Shipped defaults, read by Get Effective TplSection Config when no section is passed. -->
+  <ItemGroup>
+    <None Include="..\Config\TplSection.default.toml" Pack="true" PackagePath="content/Config/" />
+  </ItemGroup>
+
+  <!-- Declared as public dependency so nuspec gets a net8.0-windows dependency group.
+       Studio uses that group for compatibility checks. -->
+  <ItemGroup>
+    <PackageReference Include="UiPath.System.Activities" Version="26.8.2" />
+  </ItemGroup>
+
+  <!-- Config package as a dependency range, restated here because the main project references it privately. -->
+  <ItemGroup>
+    <PackageReference Include="CPMForge.Config.Plus" Version="[$(CpmfConfigPlusVersion),0.4)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CPMForge.Template\CPMForge.Template.csproj">
+      <PrivateAssets>all</PrivateAssets>
+    </ProjectReference>
+    <ProjectReference Include="..\CPMForge.Template.Api\CPMForge.Template.Api.csproj">
+      <PrivateAssets>all</PrivateAssets>
+    </ProjectReference>
+    <ProjectReference Include="..\CPMForge.Template.Design\CPMForge.Template.Design.csproj"
+                      Condition="'$(TargetFramework)' == 'net8.0-windows'">
+      <PrivateAssets>all</PrivateAssets>
+    </ProjectReference>
+    <ProjectReference Include="..\..\rules\CPMForge.Template.Rules\CPMForge.Template.Rules.csproj">
+      <PrivateAssets>all</PrivateAssets>
+    </ProjectReference>
+  </ItemGroup>
+
+  <!--
+    AddDlls: collect per-TFM DLLs from each project's own output directory.
+    PrivateAssets=all on ProjectReferences prevents DLL copy to this project's OutputPath,
+    so we reference each project's bin directly.
+
+    CPMForge.Template.Rules targets net6.0;net8.0 (no net8.0-windows leg), so its DLL is
+    pulled from its net8.0 build output regardless of this project's own $(TargetFramework).
+
+    Result: lib/net8.0-windows/CPMForge.Template.dll
+            lib/net8.0-windows/CPMForge.Template.Api.dll
+            lib/net8.0-windows/CPMForge.Template.Design.dll
+            lib/net8.0-windows/CPMForge.Template.Rules.dll
+  -->
+  <Target Name="AddDlls">
+    <ItemGroup>
+      <BuildOutputInPackage Include="..\CPMForge.Template\bin\$(Configuration)\$(TargetFramework)\CPMForge.Template.dll" />
+      <BuildOutputInPackage Include="..\CPMForge.Template.Api\bin\$(Configuration)\$(TargetFramework)\CPMForge.Template.Api.dll" />
+      <BuildOutputInPackage Include="..\..\rules\CPMForge.Template.Rules\bin\$(Configuration)\net8.0\CPMForge.Template.Rules.dll" />
+    </ItemGroup>
+    <ItemGroup Condition="'$(TargetFramework)' == 'net8.0-windows'">
+      <BuildOutputInPackage Include="..\CPMForge.Template.Design\bin\$(Configuration)\$(TargetFramework)\CPMForge.Template.Design.dll" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="RemoveMetaDll" AfterTargets="BuiltProjectOutputGroup">
+    <ItemGroup>
+      <BuiltProjectOutputGroupOutput Remove="@(BuiltProjectOutputGroupOutput)" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="CleanOldNupkg" BeforeTargets="Build">
+    <ItemGroup>
+      <_OldPkg Include="$(PackageOutputPath)\$(PackageId)*.nupkg" />
+    </ItemGroup>
+    <Delete Files="@(_OldPkg)" ContinueOnError="WarnAndContinue" />
+  </Target>
+
+</Project>

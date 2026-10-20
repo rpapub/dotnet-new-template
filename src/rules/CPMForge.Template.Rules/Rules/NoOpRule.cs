@@ -5,7 +5,7 @@
 using UiPath.Studio.Activities.Api.Analyzer.Rules;
 using UiPath.Studio.Analyzer.Models;
 
-using WatchfulAnvil.Sdk.Core;
+using CPMForge.RulesSdk.Core;
 
 namespace CPMForge.Template.Rules.Rules
 {

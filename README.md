@@ -1,6 +1,6 @@
 # dotnet-new-template — UiPath Coded Activities (Plus Edition)
 
-`dotnet new` template for UiPath VS-compiled coded activities: NativeActivity scope, ActivityDesigner chrome, DesignPropertiesViewModel, split NuGet package, xunit tests.
+`dotnet new` template for UiPath VS-compiled coded activities: a typed config section read through CPMForge.Config.Plus, DesignPropertiesViewModel, split NuGet package, Workflow Analyzer rules, xunit tests and a Studio demo process.
 
 ---
 
@@ -27,9 +27,9 @@ dotnet new cpmf-custom-activities -n Acme.MyActivities
 
 ```bash
 cd Acme.MyActivities
-dotnet build -c Release
-dotnet build Acme.MyActivities.Packaging/Acme.MyActivities.Packaging.csproj -c Release
-# → Acme.MyActivities.Plus.0.0.1.nupkg in build/nupkg/
+just build      # or: dotnet build Acme.MyActivities.Plus.slnx -c Release
+# → Acme.MyActivities.Plus.<version>.nupkg and Acme.MyActivities.WorkflowAnalyzerRules.<version>.nupkg in build/nupkg/
+just publish    # → local feed PublicLocal (C:\Users\Public\NuGetFeed) via C:\Users\Public\Publish-ToNuGetFeed.ps1
 ```
 
 ---
@@ -39,7 +39,7 @@ dotnet build Acme.MyActivities.Packaging/Acme.MyActivities.Packaging.csproj -c R
 | Parameter | Default | Description |
 |---|---|---|
 | `-n` / `--name` | _(required)_ | Root namespace, e.g. `Acme.MyActivities` |
-| `--authors` | `Your Name` | Author in NuGet metadata and copyright |
+| `--authors` | `Christian Prior-Mamulyan` | Author in NuGet metadata and copyright |
 | `--workflowCompilerVersion` | `26.0.0-alpha.22366` | `uipath.workflowcompiler.windows` version in `NUGET_PACKAGES` |
 | `--runtimeDesignVersion` | `25.10.33` | `uipath.uiautomation.activities.runtime.design` version in `NUGET_PACKAGES` |
 
@@ -58,34 +58,38 @@ dotnet new cpmf-custom-activities -n Acme.MyActivities \
 
 ```
 Acme.MyActivities/
-├── Directory.Build.props              ← SDK paths + package metadata (edit versions here)
-├── nuget.config
-├── justfile                           ← build/test/pack/publish shortcuts
+├── Directory.Build.props                  ← SDK paths, CpmfConfigPlusVersion, package metadata (edit versions here)
+├── nuget.config                           ← PublicLocal + T:\nuget-feed (CPMForge.RulesSdk) + nuget.org
+├── justfile                               ← build/test/publish/bump shortcuts
+├── manifest.json                          ← schema v3 repo manifest (edit name/description/category)
+├── .github/workflows/release.yml          ← calls the shared pack workflow
 ├── Acme.MyActivities.Plus.slnx
-├── Acme.MyActivities/                 ← runtime assembly (net6.0 + net6.0-windows)
-│   ├── Activities/
-│   │   ├── WithVaultSession.cs        ← NativeActivity scope with typed delegate Body
-│   │   ├── DocumentExists.cs
-│   │   ├── ReadDocument.cs
-│   │   └── WriteDocument.cs
-│   ├── Models/                        ← AuthMode, VaultSession, VaultDocument, ...
-│   ├── Shared/                        ← ContinuableAsyncNativeActivity base class
-│   └── Exceptions/
-├── Acme.MyActivities.Api/             ← ICodedWorkflowsServiceRegistry + VaultOperations
-├── Acme.MyActivities.Design/          ← WPF designer chrome (net6.0-windows only)
-│   ├── ViewModels/                    ← DesignPropertiesViewModel per activity
-│   └── WithVaultSessionDesigner.xaml  ← ActivityDesigner with WorkflowItemPresenter
-├── Acme.MyActivities.Packaging/       ← produces Acme.MyActivities.Plus.nupkg
-└── Acme.MyActivities.Tests/           ← xunit tests
+└── src/
+    ├── plus/
+    │   ├── Config/MyActivities.default.toml    ← shipped defaults, packed into content/Config/
+    │   ├── Acme.MyActivities/                  ← runtime assembly (net8.0-windows + net8.0)
+    │   │   ├── Activities/GetEffectiveMyActivitiesConfig.cs
+    │   │   ├── Configuration/                  ← [ConfigSection] class + its resolve logic
+    │   │   └── Shared/                         ← async NativeActivity base classes
+    │   ├── Acme.MyActivities.Api/              ← ICodedWorkflowsServiceRegistry
+    │   ├── Acme.MyActivities.Design/           ← DesignPropertiesViewModel per activity (net8.0-windows)
+    │   ├── Acme.MyActivities.Packaging/        ← produces Acme.MyActivities.Plus.nupkg (net8.0-windows + net8.0)
+    │   └── Acme.MyActivities.Tests/            ← xunit tests
+    ├── rules/
+    │   ├── Acme.MyActivities.Rules/            ← Workflow Analyzer rules on CPMForge.RulesSdk
+    │   └── Acme.MyActivities.Rules.Packaging/  ← produces Acme.MyActivities.WorkflowAnalyzerRules.nupkg
+    └── demo/                                   ← UiPath Studio process using the packed library
 ```
 
-All activities throw `NotImplementedException` — they are opinionated stubs reflecting the target API. Implement them against your backend.
+The config section, its class and its default file are named after the last segment of `-n`
+(`Acme.MyActivities` → `MyActivities`). Replace the example key `Enabled` with the library's own settings.
 
 ---
 
 ## Prerequisites
 
-- .NET SDK 6.0+
+- .NET SDK 8.0+
+- Local feeds: `C:\Users\Public\NuGetFeed` (PublicLocal, holds CPMForge.Config.Plus) and `T:\nuget-feed` (holds CPMForge.RulesSdk)
 - `NUGET_PACKAGES` environment variable pointing to your NuGet global packages folder
 - `uipath.workflowcompiler.windows` extracted in `NUGET_PACKAGES`
 - `uipath.uiautomation.activities.runtime.design` extracted in `NUGET_PACKAGES`

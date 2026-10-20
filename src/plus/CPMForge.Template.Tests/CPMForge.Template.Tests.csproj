@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net8.0-windows</TargetFrameworks>
+    <IsPackable>false</IsPackable>
+    <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CPMForge.Template\CPMForge.Template.csproj" />
+    <ProjectReference Include="..\..\rules\CPMForge.Template.Rules\CPMForge.Template.Rules.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!--
+      No ExcludeAssets=runtime here, unlike the rule and activity projects.
+      Those exclude it because Studio supplies these assemblies at run time, so shipping
+      them would be wrong. A test host has no Studio: excluding the runtime assets left
+      the DLL out of the test output and every rule test died in its constructor with
+      "Could not load file or assembly 'UiPath.Studio.Activities.Api'".
+    -->
+    <PackageReference Include="UiPath.Activities.Api" Version="24.10.1">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <!-- The main project references CPMForge.Config.Plus privately, so the test host needs its own copy. -->
+  <ItemGroup>
+    <PackageReference Include="CPMForge.Config.Plus" Version="$(CpmfConfigPlusVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.0" />
+    <PackageReference Include="xunit" Version="2.4.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Activities">
+      <HintPath>$(SystemActivitiesDll)</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+</Project>

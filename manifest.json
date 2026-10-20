@@ -1,0 +1,72 @@
+{
+  "schema_version": 3,
+  "name": "cpmf-uipsl-tplsection",
+  "description": "CPMForge.Template: UiPath coded activities library. Replace this description.",
+  "category": "dev-tooling",
+  "library_display_name": "TplSection",
+  "status": "experimental",
+  "targets": [
+    {
+      "kind": "plus",
+      "stage": "dev",
+      "path": "src/plus/CPMForge.Template",
+      "source": { "csproj": "src/plus/CPMForge.Template/CPMForge.Template.csproj" },
+      "delivers": []
+    },
+    {
+      "kind": "other",
+      "stage": "dev",
+      "path": "src/plus/CPMForge.Template.Api",
+      "source": { "csproj": "src/plus/CPMForge.Template.Api/CPMForge.Template.Api.csproj" },
+      "delivers": [],
+      "note": "coded-workflow service registry, not itself an activities library"
+    },
+    {
+      "kind": "design",
+      "stage": "dev",
+      "path": "src/plus/CPMForge.Template.Design",
+      "source": { "csproj": "src/plus/CPMForge.Template.Design/CPMForge.Template.Design.csproj" },
+      "delivers": []
+    },
+    {
+      "kind": "packaging",
+      "stage": "prod",
+      "path": "src/plus/CPMForge.Template.Packaging",
+      "source": { "csproj": "src/plus/CPMForge.Template.Packaging/CPMForge.Template.Packaging.csproj" },
+      "delivers": [
+        { "artifact": "nupkg", "brand": "cpmf", "edition": "Plus", "channels": ["nuget-feed"] }
+      ]
+    },
+    {
+      "kind": "tests",
+      "stage": "test",
+      "path": "src/plus/CPMForge.Template.Tests",
+      "source": { "csproj": "src/plus/CPMForge.Template.Tests/CPMForge.Template.Tests.csproj" },
+      "delivers": []
+    },
+    {
+      "kind": "rules",
+      "stage": "dev",
+      "path": "src/rules/CPMForge.Template.Rules",
+      "source": { "csproj": "src/rules/CPMForge.Template.Rules/CPMForge.Template.Rules.csproj" },
+      "delivers": []
+    },
+    {
+      "kind": "packaging",
+      "stage": "prod",
+      "path": "src/rules/CPMForge.Template.Rules.Packaging",
+      "source": { "csproj": "src/rules/CPMForge.Template.Rules.Packaging/CPMForge.Template.Rules.Packaging.csproj" },
+      "delivers": [
+        { "artifact": "nupkg", "brand": "cpmf", "edition": "WorkflowAnalyzerRules", "channels": ["nuget-feed"] }
+      ]
+    },
+    {
+      "kind": "demo",
+      "stage": "dev",
+      "path": "src/demo",
+      "source": { "project_json": "src/demo/project.json" },
+      "delivers": [],
+      "note": "UiPath Studio process, restored/run via uip rpa or Studio -- not a .NET project, never built through dotnet build/pack. Harness only, never published."
+    }
+  ]
+}

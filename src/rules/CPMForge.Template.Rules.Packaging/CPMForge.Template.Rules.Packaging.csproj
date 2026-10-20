@@ -23,6 +23,11 @@
   <Target Name="AddDlls">
     <ItemGroup>
       <BuildOutputInPackage Include="..\CPMForge.Template.Rules\bin\$(Configuration)\net8.0\CPMForge.Template.Rules.dll" />
+      <!-- Studio loads a Workflow Analyzer rules package from its own folder, not through NuGet
+           dependency resolution, so a nuspec dependency on CPMForge.RulesSdk is never restored.
+           The SDK DLL the rules were built against is flattened in here instead.
+           Change the version here and in CPMForge.Template.Rules.csproj together. -->
+      <BuildOutputInPackage Include="$(NUGET_PACKAGES)\cpmforge.rulessdk\0.0.5\lib\net8.0\CPMForge.RulesSdk.dll" />
     </ItemGroup>
   </Target>
 

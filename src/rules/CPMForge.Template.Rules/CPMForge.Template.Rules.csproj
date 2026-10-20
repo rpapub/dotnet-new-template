@@ -13,8 +13,11 @@
       WatchfulAnvil.Sdk under Core/ and Common/, with the namespace rewritten. That copy
       drifted from the original in both directions and stranded real bug fixes on each
       side for months. Reference the SDK instead of copying it.
+
+      WatchfulAnvil.Sdk was renamed to CPMForge.RulesSdk. The Rules.Packaging project flattens
+      the same SDK DLL into the rules package; change the version in both places together.
     -->
-    <PackageReference Include="WatchfulAnvil.Sdk" Version="0.1.0" />
+    <PackageReference Include="CPMForge.RulesSdk" Version="0.0.5" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">

@@ -15,13 +15,25 @@
   "forms": {
     "noop": {
       "identifier": "noop"
+    },
+    "lastSegment": {
+      "identifier": "replace",
+      "pattern": "^.*\\.",
+      "replacement": ""
+    },
+    "lastSegmentLower": {
+      "identifier": "chain",
+      "steps": [ "lastSegment", "lowerCaseInvariant" ]
+    },
+    "lowerCaseInvariant": {
+      "identifier": "lowerCaseInvariant"
     }
   },
   "symbols": {
     "authors": {
       "type": "parameter",
       "datatype": "string",
-      "defaultValue": "Your Name",
+      "defaultValue": "Christian Prior-Mamulyan",
       "description": "Author name used in NuGet metadata and copyright.",
       "replaces": "Christian Prior-Mamulyan"
     },
@@ -52,6 +64,33 @@
       "valueSource": "name",
       "valueTransform": "noop",
       "replaces": "CPMForgePath"
+    },
+    "sectionName": {
+      "type": "derived",
+      "valueSource": "name",
+      "valueTransform": "lastSegment",
+      "replaces": "TplSection",
+      "fileRename": "TplSection",
+      "description": "Last dot-segment of the name (CPMForge.Sops -> Sops): the config section, its class and its default .toml."
+    },
+    "repoSlug": {
+      "type": "derived",
+      "valueSource": "name",
+      "valueTransform": "lastSegmentLower",
+      "replaces": "tplsection",
+      "description": "Lower-cased last dot-segment, used in the manifest's repo name (cpmf-uipsl-sops)."
+    },
+    "demoProjectId": {
+      "type": "generated",
+      "generator": "guid",
+      "replaces": "5f3c9a7e-1b4d-4e8a-9c61-0d7e3b2a8f14",
+      "parameters": { "defaultFormat": "d" }
+    },
+    "demoEntryPointId": {
+      "type": "generated",
+      "generator": "guid",
+      "replaces": "8e1d4b6c-3a9f-4c27-b5e0-7f2a6d9c1e83",
+      "parameters": { "defaultFormat": "d" }
     }
   },
   "sources": [
@@ -69,10 +108,10 @@
             "*.Templates.csproj",
             "template-overrides/**",
             "CPMForge.Template.Plus.slnx",
-            "src/coded/CPMForge.Template.Api/CPMForge.Template.Api.csproj",
-            "src/coded/CPMForge.Template.Design/CPMForge.Template.Design.csproj",
-            "src/coded/CPMForge.Template.Packaging/CPMForge.Template.Packaging.csproj",
-            "src/coded/CPMForge.Template.Tests/CPMForge.Template.Tests.csproj"
+            "src/plus/CPMForge.Template.Api/CPMForge.Template.Api.csproj",
+            "src/plus/CPMForge.Template.Design/CPMForge.Template.Design.csproj",
+            "src/plus/CPMForge.Template.Packaging/CPMForge.Template.Packaging.csproj",
+            "src/plus/CPMForge.Template.Tests/CPMForge.Template.Tests.csproj"
           ]
         }
       ]
